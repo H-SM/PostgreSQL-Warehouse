@@ -382,19 +382,256 @@ test=# SELECT * FROM person ORDER BY date_of_birth;
    61 | Camala      | Minger             | cminger1o@cbc.ca                    | Female      | 2022-10-30    | Slovenia
 ```
 
+## DISTINCT 
 
+```shell
+test=# SELECT country_of_birth FROM person ORDER BY country_of_birth;
+     country_of_birth
+--------------------------
+ Afghanistan
+ Afghanistan
+ Afghanistan
+ Afghanistan
+ Albania
+ Albania
+ Albania
+ Albania
+ Algeria
+ Angola
+ Angola
+ Argentina
+ Argentina
+ Argentina
+ Argentina
 
-<!-- creating a database -> 
-
-creating a database -> 
-```shell 
-postgres=# CREATE DATABASE test;
+test=# SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth;
+     country_of_birth
+--------------------------
+ Afghanistan
+ Albania
+ Algeria
+ Angola
+ Argentina
+ Armenia
+ Azerbaijan
+ Bahamas
+ Bangladesh
+ Belarus
+ Bhutan
+ Bolivia
+ Bosnia and Herzegovina
+ Botswana
+ Brazil
+ Bulgaria
+ Cameroon
+ Canada
+ Central African Republic
+ Chad
+ Chile
+ China
+ Colombia
 ```
-creating a database -> 
-```shell 
-postgres=# CREATE DATABASE test;
+
+## WHERE clause 
+
+filter the data over our conditions.  as -> 
+```shell
+test=# SELECT * FROM person WHERE gender = 'Female';
+  id  | first_name  |   last_name    |               email                | gender | date_of_birth |     country_of_birth
+------+-------------+----------------+------------------------------------+--------+---------------+--------------------------
+    2 | Mirella     | Hane           | mhane1@wikipedia.org               | Female | 2023-07-12    | Thailand
+    3 | Rosanne     | Frantsev       |                                    | Female | 2022-11-18    | Zambia
+    4 | Loleta      | Pattesall      | lpattesall3@vistaprint.com         | Female | 2023-03-27    | Sweden
+    8 | Wynnie      | Bourne         | wbourne7@boston.com                | Female | 2023-03-10    | China
+   10 | Tanitansy   | Gann           |                                    | Female | 2023-08-27    | Japan
+   11 | Reba        | Borsnall       |                                    | Female | 2022-11-27    | China
+   13 | Tamiko      | Minty          |                                    | Female | 2022-11-19    | Jordan
+   15 | Giselle     | Titchmarsh     | gtitchmarshe@netscape.com          | Female | 2023-07-03    | Indonesia
+   17 | Amandie     | Yurinov        | ayurinovg@cbslocal.com             | Female | 2023-04-26    | Hungary
+   26 | Elna        | Dumelow        | edumelowp@utexas.edu               | Female | 2023-09-21    | Kazakhstan
+   28 | Pauly       | Johnston       | pjohnstonr@wordpress.com           | Female | 2023-01-31    | Malaysia
+   30 | Arabele     | Orringe        | aorringet@yahoo.co.jp              | Female | 2022-12-14    | China
+   32 | Nicholle    | Joanic         |                                    | Female | 2023-04-14    | Yemen
+   33 | Britteny    | Bourne         |                                    | Female | 2023-01-05    | China
+   34 | Sibella     | Comellini      | scomellinix@yelp.com               | Female | 2023-06-19    | China
+   35 | Mureil      | Ogilvie        | mogilviey@ask.com                  | Female | 2023-06-21    | Russia
+   36 | Sonnie      | McKnockiter    | smcknockiterz@answers.com          | Female | 2023-06-11    | Uganda
+   38 | Nadine      | Lewton         | nlewton11@parallels.com            | Female | 2023-02-13    | Bosnia and Herzegovina
+   39 | Mattie      | Durante        | mdurante12@ycombinator.com         | Female | 2022-11-02    | China
+   41 | Alidia      | Klimochkin     | aklimochkin14@redcross.org         | Female | 2023-01-09    | Croatia
 ```
-creating a database -> 
-```shell 
-postgres=# CREATE DATABASE test;
-``` -->
+
+```shell
+test=# SELECT * FROM person WHERE gender = 'Male' AND country_of_birth = 'Poland';
+ id  | first_name | last_name  |             email             | gender | date_of_birth | country_of_birth
+-----+------------+------------+-------------------------------+--------+---------------+------------------
+ 191 | Towny      | Antognoni  | tantognoni5a@nasa.gov         | Male   | 2022-12-25    | Poland
+ 234 | Silvester  | Cranston   | scranston6h@hp.com            | Male   | 2023-04-13    | Poland
+ 236 | Federico   | Caselli    | fcaselli6j@histats.com        | Male   | 2023-05-02    | Poland
+ 301 | Seamus     | Fairlie    | sfairlie8c@arizona.edu        | Male   | 2023-10-02    | Poland
+ 341 | Dall       | Vennings   | dvennings9g@howstuffworks.com | Male   | 2023-10-08    | Poland
+ 363 | Rollins    | Heasley    | rheasleya2@artisteer.com      | Male   | 2023-07-20    | Poland
+ 365 | Thedrick   | Colnet     | tcolneta4@yandex.ru           | Male   | 2023-09-21    | Poland
+ 373 | Knox       | Owens      |                               | Male   | 2023-04-27    | Poland
+ 390 | Vidovic    | Chimenti   | vchimentiat@freewebs.com      | Male   | 2023-08-30    | Poland
+ 399 | Berkeley   | Cubbit     |                               | Male   | 2023-03-26    | Poland
+ 470 | Waylan     | MacMechan  |                               | Male   | 2023-06-24    | Poland
+ 479 | Kimbell    | Tindley    | ktindleyda@digg.com           | Male   | 2023-09-08    | Poland
+ 531 | Nikolos    | Pawson     | npawsoneq@ucoz.ru             | Male   | 2023-01-02    | Poland
+ 573 | Meredith   | Kensitt    | mkensittfw@phpbb.com          | Male   | 2023-02-06    | Poland
+ 849 | Stephanus  | Isles      |                               | Male   | 2023-09-30    | Poland
+ 867 | Dominik    | Pettican   |                               | Male   | 2022-12-09    | Poland
+ 889 | Mayne      | Boddington | mboddingtonoo@rakuten.co.jp   | Male   | 2023-05-18    | Poland
+ 899 | Grant      | Gaishson   | ggaishsonoy@wired.com         | Male   | 2023-06-23    | Poland
+ 952 | Grant      | Newband    |                               | Male   | 2023-09-20    | Poland
+ 953 | Dilly      | Zanre      |                               | Male   | 2023-08-22    | Poland
+(20 rows)
+```
+
+## COMPARISON OPERATIONS 
+
+```shell
+test=# SELECT 1=1;
+ ?column?
+----------
+ t
+(1 row)
+```
+
+```shell
+test=# SELECT 1<>2;
+# not equal to
+ ?column?
+----------
+ t
+(1 row)
+
+test=# SELECT 'hsm'<>'HSM';
+ ?column?
+----------
+ t
+(1 row)
+
+
+test=# SELECT 'hsm'<>'hsm';
+ ?column?
+----------
+ f
+(1 row)
+
+
+test=# SELECT 'hsm'<>'hsm1';
+ ?column?
+----------
+ t
+(1 row)
+```
+other comparisons are simple -> `> < >= <=`
+## Limit, Offset & fetch
+
+```bash
+test=# SELECT * FROM person LIMIT 10;
+ id | first_name | last_name |           email            |   gender   | date_of_birth | country_of_birth
+----+------------+-----------+----------------------------+------------+---------------+------------------
+  1 | Ab         | Bowater   | abowater0@toplist.cz       | Male       | 2022-11-04    | Ukraine
+  2 | Mirella    | Hane      | mhane1@wikipedia.org       | Female     | 2023-07-12    | Thailand
+  3 | Rosanne    | Frantsev  |                            | Female     | 2022-11-18    | Zambia
+  4 | Loleta     | Pattesall | lpattesall3@vistaprint.com | Female     | 2023-03-27    | Sweden
+  5 | Thurston   | Weatherby | tweatherby4@senate.gov     | Male       | 2023-08-03    | Egypt
+  6 | Dev        | De Stoop  | ddestoop5@last.fm          | Polygender | 2023-04-10    | China
+  7 | Ambrosi    | Pepper    | apepper6@google.co.jp      | Male       | 2022-12-10    | South Korea
+  8 | Wynnie     | Bourne    | wbourne7@boston.com        | Female     | 2023-03-10    | China
+  9 | Penny      | Hutt      | phutt8@twitter.com         | Male       | 2023-05-18    | Peru
+ 10 | Tanitansy  | Gann      |                            | Female     | 2023-08-27    | Japan
+(10 rows)
+```
+
+```bash
+test=# SELECT * FROM person OFFSET 5 LIMIT 5 ;
+ id | first_name | last_name |         email         |   gender   | date_of_birth | country_of_birth
+----+------------+-----------+-----------------------+------------+---------------+------------------
+  6 | Dev        | De Stoop  | ddestoop5@last.fm     | Polygender | 2023-04-10    | China
+  7 | Ambrosi    | Pepper    | apepper6@google.co.jp | Male       | 2022-12-10    | South Korea
+  8 | Wynnie     | Bourne    | wbourne7@boston.com   | Female     | 2023-03-10    | China
+  9 | Penny      | Hutt      | phutt8@twitter.com    | Male       | 2023-05-18    | Peru
+ 10 | Tanitansy  | Gann      |                       | Female     | 2023-08-27    | Japan
+(5 rows)
+```
+
+the better way for limiting over the viw on the table -> 
+```bash
+test=# SELECT * FROM person OFFSET 5 FETCH NEXT 23 ROW ONLY;
+ id | first_name |  last_name  |            email             |   gender   | date_of_birth | country_of_birth
+----+------------+-------------+------------------------------+------------+---------------+------------------
+  6 | Dev        | De Stoop    | ddestoop5@last.fm            | Polygender | 2023-04-10    | China
+  7 | Ambrosi    | Pepper      | apepper6@google.co.jp        | Male       | 2022-12-10    | South Korea
+  8 | Wynnie     | Bourne      | wbourne7@boston.com          | Female     | 2023-03-10    | China
+  9 | Penny      | Hutt        | phutt8@twitter.com           | Male       | 2023-05-18    | Peru
+ 10 | Tanitansy  | Gann        |                              | Female     | 2023-08-27    | Japan
+ 11 | Reba       | Borsnall    |                              | Female     | 2022-11-27    | China
+ 12 | Frank      | Staniland   | fstanilandb@nature.com       | Male       | 2022-12-27    | Czech Republic
+ 13 | Tamiko     | Minty       |                              | Female     | 2022-11-19    | Jordan
+ 14 | Arman      | Gartenfeld  | agartenfeldd@arstechnica.com | Male       | 2023-04-09    | France
+ 15 | Giselle    | Titchmarsh  | gtitchmarshe@netscape.com    | Female     | 2023-07-03    | Indonesia
+ 16 | Raddy      | Parkhouse   | rparkhousef@illinois.edu     | Male       | 2022-11-30    | Czech Republic
+ 17 | Amandie    | Yurinov     | ayurinovg@cbslocal.com       | Female     | 2023-04-26    | Hungary
+ 18 | Neil       | Ritchings   | nritchingsh@goodreads.com    | Male       | 2023-08-22    | Venezuela
+ 19 | Wyndham    | Bugge       |                              | Male       | 2023-07-17    | Albania
+ 20 | Bink       | D'eye       | bdeyej@booking.com           | Male       | 2023-08-12    | United States
+ 21 | Esme       | Ondracek    | eondracekk@google.fr         | Non-binary | 2023-01-23    | Belarus
+ 22 | Lester     | Postlewhite | lpostlewhitel@indiatimes.com | Male       | 2023-03-27    | Russia
+ 23 | Sidney     | Yakebovich  | syakebovichm@berkeley.edu    | Male       | 2023-06-03    | Philippines
+ 24 | Harv       | Noirel      | hnoireln@ameblo.jp           | Male       | 2023-06-07    | France
+ 25 | Kelly      | Hackforth   | khackfortho@wufoo.com        | Polygender | 2023-09-03    | Greece
+ 26 | Elna       | Dumelow     | edumelowp@utexas.edu         | Female     | 2023-09-21    | Kazakhstan
+ 27 | Saundra    | Habgood     | shabgoodq@noaa.gov           | Male       | 2023-09-17    | Afghanistan
+ 28 | Pauly      | Johnston    | pjohnstonr@wordpress.com     | Female     | 2023-01-31    | Malaysia
+(23 rows)
+
+
+test=# SELECT * FROM person FETCH FIRST 4 ROW ONLY;
+ id | first_name | last_name |           email            | gender | date_of_birth | country_of_birth
+----+------------+-----------+----------------------------+--------+---------------+------------------
+  1 | Ab         | Bowater   | abowater0@toplist.cz       | Male   | 2022-11-04    | Ukraine
+  2 | Mirella    | Hane      | mhane1@wikipedia.org       | Female | 2023-07-12    | Thailand
+  3 | Rosanne    | Frantsev  |                            | Female | 2022-11-18    | Zambia
+  4 | Loleta     | Pattesall | lpattesall3@vistaprint.com | Female | 2023-03-27    | Sweden
+(4 rows)
+
+```
+
+## IN 
+
+Removes iterable multiple OR commands and introduces an array of contentt selection from.
+```shell
+test=# SELECT * FROM person WHERE country_of_birth IN ('China','Brazil','France');
+ id  | first_name  |     last_name      |                email                |   gender    | date_of_birth | country_of_birth
+-----+-------------+--------------------+-------------------------------------+-------------+---------------+------------------
+   6 | Dev         | De Stoop           | ddestoop5@last.fm                   | Polygender  | 2023-04-10    | China
+   8 | Wynnie      | Bourne             | wbourne7@boston.com                 | Female      | 2023-03-10    | China
+  11 | Reba        | Borsnall           |                                     | Female      | 2022-11-27    | China
+  14 | Arman       | Gartenfeld         | agartenfeldd@arstechnica.com        | Male        | 2023-04-09    | France
+  24 | Harv        | Noirel             | hnoireln@ameblo.jp                  | Male        | 2023-06-07    | France
+  30 | Arabele     | Orringe            | aorringet@yahoo.co.jp               | Female      | 2022-12-14    | China
+  31 | Angelo      | Riolfo             | ariolfou@privacy.gov.au             | Male        | 2022-11-10    | China
+  33 | Britteny    | Bourne             |                                     | Female      | 2023-01-05    | China
+  34 | Sibella     | Comellini          | scomellinix@yelp.com                | Female      | 2023-06-19    | China
+  39 | Mattie      | Durante            | mdurante12@ycombinator.com          | Female      | 2022-11-02    | China
+  45 | Chaim       | Mishow             |                                     | Male        | 2023-01-12    | France
+  51 | Leandra     | Serris             | lserris1e@about.com                 | Agender     | 2023-01-28    | China
+  52 | Alick       | Bownde             | abownde1f@sciencedaily.com          | Male        | 2022-10-22    | France
+  54 | Laurice     | Lillee             | llillee1h@msu.edu                   | Female      | 2022-12-30    | China
+  55 | Donia       | Sanderson          | dsanderson1i@google.co.uk           | Agender     | 2023-05-11    | China
+  62 | Amalita     | Fulep              | afulep1p@bing.com                   | Female      | 2023-06-13    | France
+  63 | Myrtice     | Addams             | maddams1q@timesonline.co.uk         | Female      | 2023-06-29    | China
+  65 | Taffy       | Harman             |                                     | Female      | 2023-09-16    | France
+  66 | Ralina      | Peete              | rpeete1t@cisco.com                  | Female      | 2022-11-03    | China
+  79 | Alameda     | Annion             | aannion26@fc2.com                   | Female      | 2023-08-08    | China
+  80 | Moore       | Powrie             |                                     | Male        | 2023-09-09    | China
+  89 | Shalom      | Pallaske           | spallaske2g@cyberchimps.com         | Male        | 2023-06-03    | China
+  94 | Grazia      | Bendon             | gbendon2l@godaddy.com               | Female      | 2023-03-15    | China
+  97 | Jefferson   | Roset              |                                     | Male        | 2023-04-22    | France
+ 105 | Raphaela    | Pate               | rpate2w@reuters.com                 | Genderfluid | 2023-01-31    | Brazil
+ 107 | Dru         | Seniour            |                                     | Female      | 2022-11-20    | China
+```
+
