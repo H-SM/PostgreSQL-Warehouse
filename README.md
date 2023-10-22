@@ -1063,3 +1063,6 @@ test=# SELECT make, SUM(price) FROM car GROUP BY make;
  Saab          |  5492475.97
 ```
 
+<p align="center">
+    <b><i>-------------- Continued in README2.md --------------</i></b>
+</p>
