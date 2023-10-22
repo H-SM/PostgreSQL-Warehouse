@@ -635,3 +635,431 @@ test=# SELECT * FROM person WHERE country_of_birth IN ('China','Brazil','France'
  107 | Dru         | Seniour            |                                     | Female      | 2022-11-20    | China
 ```
 
+## BETWEEN 
+
+```shell 
+test=# SELECT * FROM person WHERE date_of_birth BETWEEN '2015-01-01' AND '2023-01-01';
+ id  | first_name  |     last_name      |               email                |   gender    | date_of_birth |  country_of_birth
+-----+-------------+--------------------+------------------------------------+-------------+---------------+--------------------
+   1 | Ab          | Bowater            | abowater0@toplist.cz               | Male        | 2022-11-04    | Ukraine
+   3 | Rosanne     | Frantsev           |                                    | Female      | 2022-11-18    | Zambia
+   7 | Ambrosi     | Pepper             | apepper6@google.co.jp              | Male        | 2022-12-10    | South Korea
+  11 | Reba        | Borsnall           |                                    | Female      | 2022-11-27    | China
+  12 | Frank       | Staniland          | fstanilandb@nature.com             | Male        | 2022-12-27    | Czech Republic
+  13 | Tamiko      | Minty              |                                    | Female      | 2022-11-19    | Jordan
+  16 | Raddy       | Parkhouse          | rparkhousef@illinois.edu           | Male        | 2022-11-30    | Czech Republic
+  30 | Arabele     | Orringe            | aorringet@yahoo.co.jp              | Female      | 2022-12-14    | China
+  31 | Angelo      | Riolfo             | ariolfou@privacy.gov.au            | Male        | 2022-11-10    | China
+  39 | Mattie      | Durante            | mdurante12@ycombinator.com         | Female      | 2022-11-02    | China
+  40 | Keen        | Boutell            |                                    | Male        | 2022-12-09    | Indonesia
+  50 | Jehu        | Simkovich          |                                    | Male        | 2022-12-07    | Tanzania
+  52 | Alick       | Bownde             | abownde1f@sciencedaily.com         | Male        | 2022-10-22    | France
+  54 | Laurice     | Lillee             | llillee1h@msu.edu                  | Female      | 2022-12-30    | China
+  58 | Braden      | Deares             | bdeares1l@sbwire.com               | Male        | 2022-12-19    | Indonesia
+  61 | Camala      | Minger             | cminger1o@cbc.ca                   | Female      | 2022-10-30    | Slovenia
+  66 | Ralina      | Peete              | rpeete1t@cisco.com                 | Female      | 2022-11-03    | China
+  68 | Josias      | Haslin             | jhaslin1v@wikipedia.org            | Male        | 2022-12-24    | Japan
+  70 | Rebecca     | Crowne             |                                    | Female      | 2022-12-09    | Philippines
+  73 | Bronnie     | Bignall            | bbignall20@bloglines.com           | Male        | 2022-11-08    | Morocco
+  86 | Pasquale    | Corsar             |                                    | Male        | 2022-12-03    | Venezuela
+  90 | Jordan      | Gallihawk          | jgallihawk2h@bizjournals.com       | Female      | 2022-12-10    | Russia
+  91 | Berrie      | Giraldo            | bgiraldo2i@ucoz.com                | Female      | 2022-12-22    | South Korea
+  99 | Patric      | Pratley            | ppratley2q@shop-pro.jp             | Male        | 2022-12-25    | Indonesia
+ 103 | Adey        | Appleyard          |                                    | Female      | 2022-12-29    | Canada
+ 107 | Dru         | Seniour            |                                    | Female      | 2022-11-20    | China
+ 121 | Janessa     | McAllaster         | jmcallaster3c@1und1.de             | Female      | 2022-11-28    | Indonesia
+ 126 | Clayborn    | Lyddiard           |                                    | Male        | 2022-12-09    | China
+ ```
+
+## LIKE 
+
+```shell
+test=# SELECT * FROM person WHERE email LIKE '%.com';
+  id  | first_name  |  last_name   |              email               |   gender    | date_of_birth |     country_of_birth
+------+-------------+--------------+----------------------------------+-------------+---------------+--------------------------
+    4 | Loleta      | Pattesall    | lpattesall3@vistaprint.com       | Female      | 2023-03-27    | Sweden
+    8 | Wynnie      | Bourne       | wbourne7@boston.com              | Female      | 2023-03-10    | China
+    9 | Penny       | Hutt         | phutt8@twitter.com               | Male        | 2023-05-18    | Peru
+   12 | Frank       | Staniland    | fstanilandb@nature.com           | Male        | 2022-12-27    | Czech Republic
+   14 | Arman       | Gartenfeld   | agartenfeldd@arstechnica.com     | Male        | 2023-04-09    | France
+   15 | Giselle     | Titchmarsh   | gtitchmarshe@netscape.com        | Female      | 2023-07-03    | Indonesia
+   17 | Amandie     | Yurinov      | ayurinovg@cbslocal.com           | Female      | 2023-04-26    | Hungary
+   18 | Neil        | Ritchings    | nritchingsh@goodreads.com        | Male        | 2023-08-22    | Venezuela
+   20 | Bink        | D'eye        | bdeyej@booking.com               | Male        | 2023-08-12    | United States
+   22 | Lester      | Postlewhite  | lpostlewhitel@indiatimes.com     | Male        | 2023-03-27    | Russia
+   25 | Kelly       | Hackforth    | khackfortho@wufoo.com            | Polygender  | 2023-09-03    | Greece
+   28 | Pauly       | Johnston     | pjohnstonr@wordpress.com         | Female      | 2023-01-31    | Malaysia
+   34 | Sibella     | Comellini    | scomellinix@yelp.com             | Female      | 2023-06-19    | China
+   35 | Mureil      | Ogilvie      | mogilviey@ask.com                | Female      | 2023-06-21    | Russia
+   36 | Sonnie      | McKnockiter  | smcknockiterz@answers.com        | Female      | 2023-06-11    | Uganda
+   38 | Nadine      | Lewton       | nlewton11@parallels.com          | Female      | 2023-02-13    | Bosnia and Herzegovina
+   39 | Mattie      | Durante      | mdurante12@ycombinator.com       | Female      | 2022-11-02    | China
+   42 | Ancell      | Cundict      | acundict15@elpais.com            | Male        | 2023-01-11    | Guatemala
+   47 | Liesa       | Diwell       | ldiwell1a@xrea.com               | Female      | 2023-08-17    | Russia
+   48 | Philis      | Mulhall      | pmulhall1b@mozilla.com           | Female      | 2023-09-26    | Yemen
+   51 | Leandra     | Serris       | lserris1e@about.com              | Agender     | 2023-01-28    | China
+   52 | Alick       | Bownde       | abownde1f@sciencedaily.com       | Male        | 2022-10-22    | France
+   56 | Dom         | Scawn        | dscawn1j@blinklist.com           | Male        | 2023-05-09    | Indonesia
+
+test=# SELECT * FROM person WHERE email LIKE '%indiatimes.com';
+ id | first_name |  last_name  |            email             | gender | date_of_birth | country_of_birth
+----+------------+-------------+------------------------------+--------+---------------+------------------
+ 22 | Lester     | Postlewhite | lpostlewhitel@indiatimes.com | Male   | 2023-03-27    | Russia
+(1 row)
+
+test=# SELECT * FROM person WHERE email LIKE '%google.%';
+ id  | first_name | last_name |           email           |   gender   | date_of_birth | country_of_birth
+-----+------------+-----------+---------------------------+------------+---------------+------------------
+   7 | Ambrosi    | Pepper    | apepper6@google.co.jp     | Male       | 2022-12-10    | South Korea
+  21 | Esme       | Ondracek  | eondracekk@google.fr      | Non-binary | 2023-01-23    | Belarus
+  43 | May        | Maggi     | mmaggi16@google.com.br    | Female     | 2023-08-31    | Portugal
+  49 | Jeannette  | Anglim    | janglim1c@google.co.uk    | Female     | 2023-01-21    | Sweden
+  55 | Donia      | Sanderson | dsanderson1i@google.co.uk | Agender    | 2023-05-11    | China
+  67 | Milli      | Birley    | mbirley1u@google.co.uk    | Female     | 2023-10-18    | Malaysia
+  84 | Payton     | Frame     | pframe2b@google.cn        | Male       | 2023-05-15    | Ethiopia
+ 125 | Phillie    | Tickel    | ptickel3g@google.co.uk    | Female     | 2023-03-16    | Poland
+ 167 | Jayme      | Lavery    | jlavery4m@google.co.uk    | Male       | 2023-06-23    | France
+ 214 | Nolana     | Normant   | nnormant5x@google.ru      | Female     | 2022-11-05    | China
+ 247 | Dominick   | Prosch    | dprosch6u@google.com.au   | Male       | 2022-12-20    | Peru
+ 254 | Karia      | Blackborn | kblackborn71@google.it    | Female     | 2022-12-23    | Syria
+ 408 | Lay        | Ruddock   | lruddockbb@google.co.jp   | Male       | 2023-06-05    | Senegal
+ 459 | Jerry      | Origan    | jorigancq@google.it       | Polygender | 2023-04-13    | Colombia
+ 526 | Jock       | Perrin    | jperrinel@google.co.uk    | Male       | 2023-03-17    | Argentina
+ 611 | Kelcy      | Mitchall  | kmitchallgy@google.it     | Female     | 2022-11-27    | Philippines
+ 731 | Abran      | Fateley   | afateleyka@google.es      | Male       | 2023-06-27    | Luxembourg
+ 791 | Emelia     | Bim       | ebimly@google.com         | Female     | 2023-07-25    | Russia
+ 806 | Livvy      | Barkus    | lbarkusmd@google.ca       | Female     | 2023-03-29    | China
+ 858 | Leigh      | Velasquez | lvelasqueznt@google.com   | Female     | 2022-11-04    | Philippines
+ 872 | Alleyn     | Broadbent | abroadbento7@google.it    | Male       | 2023-05-04    | Indonesia
+ 936 | Arabella   | Elsip     | aelsippz@google.com.hk    | Female     | 2023-02-05    | France
+(22 rows)
+
+
+test=# SELECT * FROM person WHERE email LIKE '%google.__.__';
+ id  | first_name | last_name |           email           | gender  | date_of_birth | country_of_birth
+-----+------------+-----------+---------------------------+---------+---------------+------------------
+   7 | Ambrosi    | Pepper    | apepper6@google.co.jp     | Male    | 2022-12-10    | South Korea
+  49 | Jeannette  | Anglim    | janglim1c@google.co.uk    | Female  | 2023-01-21    | Sweden
+  55 | Donia      | Sanderson | dsanderson1i@google.co.uk | Agender | 2023-05-11    | China
+  67 | Milli      | Birley    | mbirley1u@google.co.uk    | Female  | 2023-10-18    | Malaysia
+ 125 | Phillie    | Tickel    | ptickel3g@google.co.uk    | Female  | 2023-03-16    | Poland
+ 167 | Jayme      | Lavery    | jlavery4m@google.co.uk    | Male    | 2023-06-23    | France
+ 408 | Lay        | Ruddock   | lruddockbb@google.co.jp   | Male    | 2023-06-05    | Senegal
+ 526 | Jock       | Perrin    | jperrinel@google.co.uk    | Male    | 2023-03-17    | Argentina
+(8 rows)
+
+
+
+test=# SELECT * FROM person WHERE country_of_birth LIKE 'P%';
+ id  | first_name |  last_name  |               email               |   gender    | date_of_birth |   country_of_birth
+-----+------------+-------------+-----------------------------------+-------------+---------------+-----------------------
+   9 | Penny      | Hutt        | phutt8@twitter.com                | Male        | 2023-05-18    | Peru
+  23 | Sidney     | Yakebovich  | syakebovichm@berkeley.edu         | Male        | 2023-06-03    | Philippines
+  43 | May        | Maggi       | mmaggi16@google.com.br            | Female      | 2023-08-31    | Portugal
+  44 | Xenia      | Shireff     |                                   | Female      | 2023-09-25    | Poland
+  53 | Standford  | Clougher    | sclougher1g@wisc.edu              | Male        | 2023-10-13    | Philippines
+  64 | Heath      | Phette      | hphette1r@slideshare.net          | Male        | 2023-06-10    | Peru
+  70 | Rebecca    | Crowne      |                                   | Female      | 2022-12-09    | Philippines
+  81 | Ramon      | Maddie      |                                   | Male        | 2023-09-06    | Philippines
+  87 | Tanitansy  | Brotheridge | tbrotheridge2e@mit.edu            | Female      | 2023-07-14    | Philippines
+  98 | Adina      | Downing     | adowning2p@army.mil               | Female      | 2023-04-13    | Philippines
+ 125 | Phillie    | Tickel      | ptickel3g@google.co.uk            | Female      | 2023-03-16    | Poland
+ 129 | Al         | Shackleford | ashackleford3k@marketwatch.com    | Male        | 2023-08-02    | Philippines
+ 132 | Lenard     | Manion      | lmanion3n@smugmug.com             | Male        | 2023-03-22    | Peru
+ 133 | Henrie     | Duigenan    | hduigenan3o@wikia.com             | Female      | 2023-02-02    | Philippines
+ 134 | Ronica     | Dandie      | rdandie3p@ed.gov                  | Female      | 2023-06-24    | Poland
+ 179 | Margeaux   | Storrie     |                                   | Female      | 2023-08-13    | Philippines
+
+  532 | Shayna     | Hadgraft    |                                   | Female      | 2022-11-10    | Poland
+test=# SELECT * FROM person WHERE country_of_birth ILIKE 'p%';
+ id  | first_name |  last_name  |               email               |   gender    | date_of_birth |   country_of_birth
+-----+------------+-------------+-----------------------------------+-------------+---------------+-----------------------
+   9 | Penny      | Hutt        | phutt8@twitter.com                | Male        | 2023-05-18    | Peru
+  23 | Sidney     | Yakebovich  | syakebovichm@berkeley.edu         | Male        | 2023-06-03    | Philippines
+  43 | May        | Maggi       | mmaggi16@google.com.br            | Female      | 2023-08-31    | Portugal
+  44 | Xenia      | Shireff     |                                   | Female      | 2023-09-25    | Poland
+  53 | Standford  | Clougher    | sclougher1g@wisc.edu              | Male        | 2023-10-13    | Philippines
+  64 | Heath      | Phette      | hphette1r@slideshare.net          | Male        | 2023-06-10    | Peru
+  70 | Rebecca    | Crowne      |                                   | Female      | 2022-12-09    | Philippines
+  81 | Ramon      | Maddie      |                                   | Male        | 2023-09-06    | Philippines
+  87 | Tanitansy  | Brotheridge | tbrotheridge2e@mit.edu            | Female      | 2023-07-14    | Philippines
+  98 | Adina      | Downing     | adowning2p@army.mil               | Female      | 2023-04-13    | Philippines
+ 125 | Phillie    | Tickel      | ptickel3g@google.co.uk            | Female      | 2023-03-16    | Poland
+ 129 | Al         | Shackleford | ashackleford3k@marketwatch.com    | Male        | 2023-08-02    | Philippines
+ 132 | Lenard     | Manion      | lmanion3n@smugmug.com             | Male        | 2023-03-22    | Peru
+ 133 | Henrie     | Duigenan    | hduigenan3o@wikia.com             | Female      | 2023-02-02    | Philippines
+ 134 | Ronica     | Dandie      | rdandie3p@ed.gov                  | Female      | 2023-06-24    | Poland
+ 179 | Margeaux   | Storrie     |                                   | Female      | 2023-08-13    | Philippines
+ 191 | Towny      | Antognoni   | tantognoni5a@nasa.gov             | Male        | 2022-12-25    | Poland
+ 201 | Aland      | Pautard     | apautard5k@wired.com              | Male        | 2022-12-04    | Philippines
+ 205 | Stanleigh  | Somner      | ssomner5o@4shared.com             | Bigender    | 2023-06-17    | Philippines
+ 215 | Shandie    | Chastang    | schastang5y@yahoo.com             | Non-binary  | 2023-07-09    | Philippines
+
+```
+
+## GROUP BY 
+
+```shell
+test=# SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
+     country_of_birth     | count
+--------------------------+-------
+ Bangladesh               |     2
+ Indonesia                |   100
+ Venezuela                |     9
+ Cameroon                 |     1
+ Luxembourg               |     2
+ Czech Republic           |    18
+ Sweden                   |    17
+ Uganda                   |     3
+ Jordan                   |     2
+ Dominican Republic       |     3
+ Ireland                  |     7
+ Macedonia                |     5
+ Sri Lanka                |     1
+ Laos                     |     1
+ Finland                  |     4
+ Portugal                 |    22
+ Malta                    |     2
+ Colombia                 |    13
+ Albania                  |     4
+ Saudi Arabia             |     3
+ Ukraine                  |    14
+ Cuba                     |     4
+
+test=# SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth ORDER BY COUNT DESC;
+     country_of_birth     | count
+--------------------------+-------
+ China                    |   196
+ Indonesia                |   100
+ Russia                   |    59
+ Philippines              |    49
+ France                   |    42
+ Poland                   |    39
+ Brazil                   |    36
+ Portugal                 |    22
+ United States            |    18
+ Czech Republic           |    18
+ Japan                    |    18
+ Sweden                   |    17
+ Peru                     |    17
+ Thailand                 |    15
+ Nigeria                  |    15
+ Ukraine                  |    14
+ Colombia                 |    13
+ Argentina                |    13
+ Greece                   |    11
+ Kazakhstan               |    10
+ Mexico                   |    10
+ Vietnam                  |     9
+ Venezuela                |     9
+ Canada                   |     9
+ Croatia                  |     9
+ Malaysia                 |     8
+ Ireland                  |     7
+ Pakistan                 |     6
+ Yemen                    |     5
+ Tanzania                 |     5
+```
+
+## GROUP BY HAVING 
+
+```shell
+test=# SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING COUNT(*)>40 ORDER BY COUNT DESC;
+ country_of_birth | count
+------------------+-------
+ China            |   196
+ Indonesia        |   100
+ Russia           |    59
+ Philippines      |    49
+ France           |    42
+(5 rows)
+```
+
+## **[General-Purpose Aggregate Functions](https://www.postgresql.org/docs/9.5/functions-aggregate.html)**
+
+   
+|Function|Argument Type(s)|Return Type|Description|
+|---|---|---|---|
+|`array_agg(expression)`|any non-array type|array of the argument type|input values, including nulls, concatenated into an array|
+|`array_agg(expression)`|any array type|same as argument data type|input arrays concatenated into array of one higher dimension (inputs must all have same dimensionality, and cannot be empty or null)|
+|`avg(expression)`|smallint, int, bigint, real, double precision, numeric, or interval|numeric for any integer-type argument, double precision for a floating-point argument, otherwise the same as the argument data type|the average (arithmetic mean) of all non-null input values|
+|`bit_and(expression)`|smallint, int, bigint, or bit|same as argument data type|the bitwise AND of all non-null input values, or null if none|
+|`bit_or(expression)`|smallint, int, bigint, or bit|same as argument data type|the bitwise OR of all non-null input values, or null if none|
+|`bool_and(expression)`|bool|bool|true if all input values are true, otherwise false|
+|`bool_or(expression)`|bool|bool|true if at least one input value is true, otherwise false|
+|`count(*)`||bigint|number of input rows|
+|`count(expression)`|any|bigint|number of input rows for which the value of expression is not null|
+|`every(expression)`|bool|bool|equivalent to `bool_and`|
+|`json_agg(expression)`|any|json|aggregates values, including nulls, as a JSON array|
+|`jsonb_agg(expression)`|any|jsonb|aggregates values, including nulls, as a JSON array|
+|`json_object_agg(name, value)`|(any, any)|json|aggregates name/value pairs as a JSON object; values can be null, but not names|
+|`jsonb_object_agg(name, value)`|(any, any)|jsonb|aggregates name/value pairs as a JSON object; values can be null, but not names|
+|`max(expression)`|any numeric, string, date/time, network, or enum type, or arrays of these types|same as argument type|maximum value of expression across all non-null input values|
+|`min(expression)`|any numeric, string, date/time, network, or enum type, or arrays of these types|same as argument type|minimum value of expression across all non-null input values|
+|`string_agg(expression, delimiter)`|(text, text) or (bytea, bytea)|same as argument types|non-null input values concatenated into a string, separated by delimiter|
+|`sum(expression)`|smallint, int, bigint, real, double precision, numeric, interval, or money|bigint for smallint or int arguments, numeric for bigint arguments, otherwise the same as the argument data type|sum of expression across all non-null input values|
+|`xmlagg(expression)`|xml|xml|concatenation of non-null XML values (see also [Section 9.14.1.7](https://www.postgresql.org/docs/9.5/functions-xml.html#FUNCTIONS-XML-XMLAGG))|
+
+It should be noted that except for `count`, these functions return a null value when no rows are selected. In particular, `sum` of no rows returns null, not zero as one might expect, and `array_agg` returns null rather than an empty array when there are no input rows. The `coalesce` function can be used to substitute zero or an empty array for null when necessary.
+
+
+## MAX 
+
+```shell
+test=# SELECT MAX(price) FROM car;
+    max
+-----------
+ 999444.30
+(1 row)
+```
+
+## AVERAGE
+
+```shell
+test=# SELECT AVG(price) FROM car;
+         avg
+---------------------
+ 492790.419160000000
+(1 row)
+
+test=# SELECT ROUND(AVG(price)) FROM car;
+ round
+--------
+ 492790
+(1 row)
+```
+
+## MIN 
+
+q) minimun price for each make and model -> 
+```shell
+test=# SELECT make, model, MIN(price) FROM car GROUP BY make, model;
+     make      |        model         |    min
+---------------+----------------------+-----------
+ Saturn        | Aura                 | 405701.80
+ Oldsmobile    | Silhouette           | 135610.09
+ Daewoo        | Lanos                | 866165.72
+ Ford          | Econoline E350       |  79830.19
+ Jeep          | Grand Cherokee       | 279212.35
+ Pontiac       | Monterey             | 611416.77
+ Hyundai       | Accent               | 223193.72
+ Dodge         | D350                 | 452620.18
+ Mazda         | CX-5                 | 244663.46
+ Infiniti      | G                    | 430626.59
+ Buick         | Electra              | 935000.73
+ Nissan        | 300ZX                | 107717.34
+ Nissan        | Xterra               | 312617.90
+ Chevrolet     | Cavalier             | 787834.34
+ Acura         | ZDX                  | 881903.16
+ Isuzu         | Axiom                | 367294.32
+ Audi          | 4000                 | 487209.19
+ Audi          | A8                   | 709109.57
+ Hyundai       | Sonata               | 433920.33
+ Lamborghini   | Countach             | 693258.67
+```
+
+```shell
+test=# SELECT make, MAX(price) FROM car GROUP BY make;
+     make      |    max
+---------------+-----------
+ Lincoln       | 970475.69
+ Honda         | 929335.28
+ Ram           | 902428.59
+ Daewoo        | 866165.72
+ Morgan        | 922903.52
+ Ford          | 985829.44
+ Smart         | 469848.62
+ Scion         | 789149.33
+ Aptera        | 489541.96
+ Maserati      | 707960.32
+ Dodge         | 979684.93
+ Chevrolet     | 927116.45
+ Infiniti      | 679216.68
+ Saturn        | 998691.18
+ MINI          | 820550.52
+ Jensen        | 149843.02
+ Bentley       | 373437.14
+ Pontiac       | 993771.45
+ Porsche       | 996496.51
+ Plymouth      | 787985.88
+ Audi          | 949269.95
+ Panoz         | 670140.02
+ Tesla         | 377541.75
+ Jaguar        | 944300.87
+ Renault       | 617073.46
+ Lexus         | 879417.90
+ Lotus         | 987945.62
+```
+
+## SUM 
+
+```shell
+test=# SELECT SUM(price) FROM car;
+     sum
+--------------
+ 492790419.16
+(1 row)
+
+test=# SELECT make, SUM(price) FROM car GROUP BY make;
+     make      |     sum
+---------------+-------------
+ Lincoln       | 15983190.11
+ Honda         | 14008370.46
+ Ram           |   902428.59
+ Daewoo        |  2104801.98
+ Morgan        |   922903.52
+ Ford          | 45791140.69
+ Smart         |   749551.35
+ Scion         |  1306352.44
+ Aptera        |   489541.96
+ Maserati      |  3481176.45
+ Dodge         | 29685602.73
+ Chevrolet     | 37017690.60
+ Infiniti      |  3107084.94
+ Saturn        |  5036912.33
+ MINI          |  2505426.40
+ Jensen        |   149843.02
+ Bentley       |   711277.41
+ Pontiac       | 18535943.66
+ Porsche       |  3397817.77
+ Plymouth      |  2470257.14
+ Audi          | 11193563.30
+ Panoz         |   706520.51
+ Tesla         |   377541.75
+ Jaguar        |  3287762.86
+ Renault       |   617073.46
+ Lexus         |  9748126.10
+ Lotus         |  3789728.35
+
+
+ test=# SELECT make, SUM(price) FROM car GROUP BY make ORDER BY SUM(price) DESC;
+     make      |     sum
+---------------+-------------
+ Ford          | 45791140.69
+ Chevrolet     | 37017690.60
+ Dodge         | 29685602.73
+ GMC           | 26154848.08
+ Toyota        | 25540240.94
+ Mitsubishi    | 20493432.04
+ Mazda         | 20386615.28
+ Pontiac       | 18535943.66
+ Buick         | 16794478.93
+ Lincoln       | 15983190.11
+ Mercedes-Benz | 15770904.45
+ Volkswagen    | 15587170.92
+ Honda         | 14008370.46
+ Nissan        | 12247657.43
+ Chrysler      | 11657087.27
+ Subaru        | 11292256.64
+ Audi          | 11193563.30
+ Hyundai       | 10555593.92
+ BMW           | 10027517.86
+ Lexus         |  9748126.10
+ Suzuki        |  8928944.44
+ Cadillac      |  8465624.21
+ Mercury       |  7863496.03
+ Volvo         |  7725594.92
+ Land Rover    |  7513304.56
+ Saab          |  5492475.97
+```
+
