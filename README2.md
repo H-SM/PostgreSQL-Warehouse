@@ -148,15 +148,36 @@ test=# SELECT first_name,last_name,COALESCE(email,'-Email not provided-') AS ema
  Wyndham     | Bugge              | -Email not provided-
 ```
 
-<!-- ## NULLIF -->
+## NULLIF
 
+```shell
+# returns the first argument, if not equal to the second argument
+test=# SELECT 10 / NULLIF(2,10);
+ ?column?
+----------
+        5
+(1 row)
+
+test=# SELECT 10 / NULLIF(10,10);
+ ?column?
+----------
+
+(1 row)
+```
+
+```shell
+test=# SELECT COALESCE(10 / NULLIF(0,0), 0);
+ coalesce
+----------
+        0
+(1 row)
+
+test=# SELECT COALESCE(10 / NULLIF(0,1), 0);
+ERROR:  division by zero
+```
+
+<!-- ## TimeStamps and Dates
 
 ```shell
 
-```
-```shell
-
-```
-```shell
-
-```
+``` -->
