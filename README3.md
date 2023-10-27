@@ -139,10 +139,60 @@ DETAIL:  Key (email)=(abowater0@toplist.cz) already exists.
 ```
 ```shell 
 
-```
-```shell 
+test=# ALTER TABLE person ADD UNIQUE(email);
+ALTER TABLE
+test=# \d person
+                                         Table "public.person"
+      Column      |          Type          | Collation | Nullable |              Default
+------------------+------------------------+-----------+----------+------------------------------------
+ id               | bigint                 |           | not null | nextval('person_id_seq'::regclass)
+ first_name       | character varying(50)  |           | not null |
+ last_name        | character varying(50)  |           | not null |
+ email            | character varying(150) |           |          |
+ gender           | character varying(50)  |           | not null |
+ date_of_birth    | date                   |           | not null |
+ country_of_birth | character varying(50)  |           |          |
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+    "person_email_key" UNIQUE CONSTRAINT, btree (email)
 
+# here the name for the constraint is decided by postgres 
 ```
-```shell 
 
+## Check constraint 
+```shell 
+# add constraint based on a boolean condition over it 
+test=# ALTER TABLE person ADD constraint gender_constraint CHECK( gender = 'Female' OR gender = 'Male');
+ALTER TABLE
+test=# \d person
+                                         Table "public.person"
+      Column      |          Type          | Collation | Nullable |              Default               ------------------+------------------------+-----------+----------+------------------------------------ id               | bigint                 |           | not null | nextval('person_id_seq'::regclass)
+ first_name       | character varying(50)  |           | not null |
+ last_name        | character varying(50)  |           | not null |
+ email            | character varying(150) |           |          |
+ gender           | character varying(50)  |           | not null |
+ date_of_birth    | date                   |           | not null |
+ country_of_birth | character varying(50)  |           |          |
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+Check constraints:
+    "gender_constraint" CHECK (gender::text = 'Female'::text OR gender::text = 'Male'::text)
+
+
+test=# insert into person (first_name, last_name, email, gender, date_of_birth, country_of_birth) values ('Ab', 'Bowater', 'abowat0@toplist.cz', 'Hello', '2022-11-04', 'Ukraine');
+ERROR:  new row for relation "person" violates check constraint "gender_constraint"
+DETAIL:  Failing row contains (1002, Ab, Bowater, abowat0@toplist.cz, Hello, 2022-11-04, Ukraine).
 ```
+## DELETE 
+
+```shell 
+DELETE FROM person WHERE gender = 'Female' AND country_of_birth = 'Hungary';
+DELETE 1
+
+test=# DELETE FROM person WHERE id = 3;
+DELETE 1
+
+test=# DELETE FROM person WHERE gender NOT IN ('Male', 'Female');
+DELETE 99
+```
+
