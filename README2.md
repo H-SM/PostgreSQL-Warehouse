@@ -176,8 +176,123 @@ test=# SELECT COALESCE(10 / NULLIF(0,1), 0);
 ERROR:  division by zero
 ```
 
-<!-- ## TimeStamps and Dates
+## TimeStamps and Dates
 
 ```shell
+test=# SELECT NOW();
+               now
+----------------------------------
+ 2023-10-27 16:27:47.806372+05:30
+(1 row)
 
-``` -->
+test=# SELECT NOW()::DATE;
+    now
+------------
+ 2023-10-27
+(1 row)
+
+
+test=# SELECT NOW()::TIME;
+       now
+-----------------
+ 16:28:22.657357
+(1 row)
+```
+
+```shell
+# Addition and subtraction in the dates and timestamps
+test=# SELECT NOW() - INTERVAL '1 YEAR';
+             ?column?
+----------------------------------
+ 2022-10-27 16:29:40.435401+05:30
+(1 row)
+
+
+test=# SELECT NOW() - INTERVAL '10 YEARS';
+             ?column?
+----------------------------------
+ 2013-10-27 16:29:51.462778+05:30
+(1 row)
+
+
+test=# SELECT NOW() - INTERVAL '10 MONTHS';
+             ?column?
+----------------------------------
+ 2022-12-27 16:30:05.553674+05:30
+(1 row)
+
+
+test=# SELECT NOW() - INTERVAL '10 DAYS';
+             ?column?
+----------------------------------
+ 2023-10-17 16:30:15.177061+05:30
+(1 row)
+
+
+test=# SELECT NOW() + INTERVAL '10 DAYS';
+             ?column?
+----------------------------------
+ 2023-11-06 16:30:23.887727+05:30
+(1 row)
+
+
+test=# SELECT NOW()::DATE + INTERVAL '10 DAYS';
+      ?column?
+---------------------
+ 2023-11-06 00:00:00
+(1 row)
+
+
+test=# SELECT (NOW()::DATE + INTERVAL '10 DAYS')::DATE;
+    date
+------------
+ 2023-11-06
+(1 row)
+```
+
+## EXTRACTING DATES and ACTUAL TIMESTAMP
+```shell
+test=# SELECT EXTRACT (YEAR FROM now());
+ extract
+---------
+    2023
+(1 row)
+
+
+test=# SELECT EXTRACT (MONTH FROM now());
+ extract
+---------
+      10
+(1 row)
+
+test=# SELECT EXTRACT (DAY FROM now());
+ extract
+---------
+      27
+(1 row)
+
+
+test=# SELECT EXTRACT (DOW FROM now());
+# date of the week
+ extract
+---------
+       5
+(1 row)
+```
+```shell
+test=# SELECT first_name, last_name, gender, country_of_birth, date_of_birth, AGE(NOW(), date_of_birth) AS Age FROM person;
+ first_name  |     last_name      |   gender    |     country_of_birth     | date_of_birth |               age
+-------------+--------------------+-------------+--------------------------+---------------+---------------------------------
+ Ab          | Bowater            | Male        | Ukraine                  | 2022-11-04    | 11 mons 23 days 16:37:31.320109
+ Mirella     | Hane               | Female      | Thailand                 | 2023-07-12    | 3 mons 15 days 16:37:31.320109
+ Rosanne     | Frantsev           | Female      | Zambia                   | 2022-11-18    | 11 mons 9 days 16:37:31.320109
+ Loleta      | Pattesall          | Female      | Sweden                   | 2023-03-27    | 7 mons 16:37:31.320109
+ Thurston    | Weatherby          | Male        | Egypt                    | 2023-08-03    | 2 mons 24 days 16:37:31.320109
+ Dev         | De Stoop           | Polygender  | China                    | 2023-04-10    | 6 mons 17 days 16:37:31.320109
+ Ambrosi     | Pepper             | Male        | South Korea              | 2022-12-10    | 10 mons 17 days 16:37:31.320109
+ Wynnie      | Bourne             | Female      | China                    | 2023-03-10    | 7 mons 17 days 16:37:31.320109
+ Penny       | Hutt               | Male        | Peru                     | 2023-05-18    | 5 mons 9 days 16:37:31.320109
+```
+```shell
+
+```
