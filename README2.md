@@ -293,6 +293,6 @@ test=# SELECT first_name, last_name, gender, country_of_birth, date_of_birth, AG
  Wynnie      | Bourne             | Female      | China                    | 2023-03-10    | 7 mons 17 days 16:37:31.320109
  Penny       | Hutt               | Male        | Peru                     | 2023-05-18    | 5 mons 9 days 16:37:31.320109
 ```
-```shell
-
-```
+<p align="center">
+    <b><i>-------------- Continued in README3.md --------------</i></b>
+</p>
