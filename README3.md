@@ -196,3 +196,44 @@ test=# DELETE FROM person WHERE gender NOT IN ('Male', 'Female');
 DELETE 99
 ```
 
+## UPDATE 
+
+```shell 
+test=# UPDATE person SET email = 'ommar@gmail.com' WHERE id = 13;
+UPDATE 1
+
+test=# SELECT * FROM person WHERE id = 13;
+ id | first_name | last_name |      email      | gender | date_of_birth | country_of_birth
+----+------------+-----------+-----------------+--------+---------------+------------------
+ 13 | Tamiko     | Minty     | ommar@gmail.com | Female | 2022-11-19    | Jordan
+(1 row)
+
+```
+
+## ON CONFLICT DO NOTHING
+
+```shell
+test=# INSERT INTO person (id, first_name, last_name, gender, email, date_of_birth, country_of_birth )
+test-# VALUES (14, 'Arman', 'Gartenfeild', 'agartenfeldd@gmail.com', 'Male', DATE '2023-04-09', 'France');
+ERROR:  duplicate key value violates unique constraint "person_pkey"
+DETAIL:  Key (id)=(14) already exists.
+test=# INSERT INTO person (id, first_name, last_name, gender, email, date_of_birth, country_of_birth )
+test-# VALUES (14, 'Arman', 'Gartenfeild', 'agartenfeldd@gmail.com', 'Male', DATE '2023-04-09', 'France')
+test-# ON CONFLICT (id) DO NOTHING;
+INSERT 0 0
+```
+
+## ON CONFLICT DO UPDATE (UPSERT)
+
+```shell
+test=# INSERT INTO person (id, first_name, last_name, email, gender, date_of_birth, country_of_birth )
+test-# VALUES (14, 'Arman', 'Gartenfeild', 'agartenfeldd@gmail.gov.in', 'Male', DATE '2023-04-09', 'France')
+test-# ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email;
+INSERT 0 1
+test=# SELECT * FROM person WHERE id = 14;
+ id | first_name | last_name  |           email           | gender | date_of_birth | country_of_birth
+----+------------+------------+---------------------------+--------+---------------+------------------
+ 14 | Arman      | Gartenfeld | agartenfeldd@gmail.gov.in | Male   | 2023-04-09    | France
+(1 row)
+# update up only the email if there is any change done by the user else do nothing
+```
