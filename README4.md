@@ -270,3 +270,147 @@ test=# SELECT * FROM pg_available_extensions;
  jsonb_plpython3u     | 1.0             |                   | transform between jsonb and plpython3u
 test=#
 ```
+
+## Understanding UUID Data Type (globally unique indentifier)
+
+```shell 
+# installing Extension
+test=# CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION
+
+#  uuid-ossp            | 1.1             | 1.1               | generate universally unique identifiers (UUIDs)
+
+test=# \df
+                                 List of functions
+ Schema |        Name        | Result data type |    Argument data types    | Type
+--------+--------------------+------------------+---------------------------+------
+ public | uuid_generate_v1   | uuid             |                           | func
+ public | uuid_generate_v1mc | uuid             |                           | func
+ public | uuid_generate_v3   | uuid             | namespace uuid, name text | func
+ public | uuid_generate_v4   | uuid             |                           | func
+ public | uuid_generate_v5   | uuid             | namespace uuid, name text | func
+ public | uuid_nil           | uuid             |                           | func
+ public | uuid_ns_dns        | uuid             |                           | func
+ public | uuid_ns_oid        | uuid             |                           | func
+ public | uuid_ns_url        | uuid             |                           | func
+ public | uuid_ns_x500       | uuid             |                           | func
+(10 rows)
+
+
+test=# SELECT uuid_generate_v4();
+           uuid_generate_v4
+--------------------------------------
+ 3062a8aa-d97e-49e1-b73f-a69d8ac62bfe
+(1 row)
+
+test=# SELECT uuid_generate_v4();
+           uuid_generate_v4
+--------------------------------------
+ d1232b7c-0867-4f52-a8d9-e6c8915ca32b
+(1 row)
+```
+
+## UUID as Primary Keys 
+
+- refer to the details on how to use the generating uuid functions for the primary key in the file of `person-car-2.sql`. 
+
+
+```shell 
+test=# SELECT * FROM person;
+              person_uid              | first_name | last_name | gender |           email            | date_of_birth | country_of_birth | car_uid
+--------------------------------------+------------+-----------+--------+----------------------------+---------------+------------------+---------
+ 4b181fd3-de1c-47e7-a891-4cb7a72e54ea | Fernanda   | Beardon   | Female | fernandab@is.gb            | 1953-10-28    | Norway           |
+ ad977e8e-d772-40d3-b564-98f4548df09c | Omar       | Calmore   | Male   |                            | 1921-04-03    | Finland          |
+ a959c388-173d-426d-8456-7e6b640b7b07 | Adriana    | Matuschek | Female | amatuschek2@feedburner.com | 1953-10-28    | Sweden           |
+(3 rows)
+
+
+test=# SELECT * FROM car;
+               car_uid                |    make    |  model   |  price
+--------------------------------------+------------+----------+----------
+ 060c332a-12c3-4aea-a5b7-e53432013973 | Land Rover | Sterling | 87665.38
+ 253f228d-f0fa-4344-866a-d622052d2d55 | GMC        | Acadia   | 17662.69
+(2 rows)
+```
+
+```shell 
+test=# UPDATE person SET car_uid = '060c332a-12c3-4aea-a5b7-e53432013973' WHERE person_uid = 'a959c388-173d-426d-8456-7e6b640b7b07';
+UPDATE 1
+test=# UPDATE person SET car_uid = '253f228d-f0fa-4344-866a-d622052d2d55' WHERE person_uid = '4b181fd3-de1c-47e7-a891-4cb7a72e54ea';
+UPDATE 1
+test=# SELECT * FROM person
+test-# JOIN car ON person.car_uid = car.car_uid;
+-[ RECORD 1 ]----+-------------------------------------
+person_uid       | a959c388-173d-426d-8456-7e6b640b7b07
+first_name       | Adriana
+last_name        | Matuschek
+gender           | Female
+email            | amatuschek2@feedburner.com
+date_of_birth    | 1953-10-28
+country_of_birth | Sweden
+car_uid          | 060c332a-12c3-4aea-a5b7-e53432013973
+car_uid          | 060c332a-12c3-4aea-a5b7-e53432013973
+make             | Land Rover
+model            | Sterling
+price            | 87665.38
+-[ RECORD 2 ]----+-------------------------------------
+person_uid       | 4b181fd3-de1c-47e7-a891-4cb7a72e54ea
+first_name       | Fernanda
+last_name        | Beardon
+gender           | Female
+email            | fernandab@is.gb
+date_of_birth    | 1953-10-28
+country_of_birth | Norway
+car_uid          | 253f228d-f0fa-4344-866a-d622052d2d55
+car_uid          | 253f228d-f0fa-4344-866a-d622052d2d55
+make             | GMC
+model            | Acadia
+price            | 17662.69
+```
+
+```shell
+test=# SELECT * FROM person
+test-# JOIN car USING(car_uid);
+-[ RECORD 1 ]----+-------------------------------------
+car_uid          | 060c332a-12c3-4aea-a5b7-e53432013973
+person_uid       | a959c388-173d-426d-8456-7e6b640b7b07
+first_name       | Adriana
+last_name        | Matuschek
+gender           | Female
+email            | amatuschek2@feedburner.com
+date_of_birth    | 1953-10-28
+country_of_birth | Sweden
+make             | Land Rover
+model            | Sterling
+price            | 87665.38
+-[ RECORD 2 ]----+-------------------------------------
+car_uid          | 253f228d-f0fa-4344-866a-d622052d2d55
+person_uid       | 4b181fd3-de1c-47e7-a891-4cb7a72e54ea
+first_name       | Fernanda
+last_name        | Beardon
+gender           | Female
+email            | fernandab@is.gb
+date_of_birth    | 1953-10-28
+country_of_birth | Norway
+make             | GMC
+model            | Acadia
+price            | 17662.69
+```
+
+```shell 
+test=# SELECT * FROM person
+test-# LEFT JOIN car USING(car_uid)
+test-# WHERE car.* IS NULL;
+-[ RECORD 1 ]----+-------------------------------------
+car_uid          |
+person_uid       | ad977e8e-d772-40d3-b564-98f4548df09c
+first_name       | Omar
+last_name        | Calmore
+gender           | Male
+email            |
+date_of_birth    | 1921-04-03
+country_of_birth | Finland
+make             |
+model            |
+price            |
+```
