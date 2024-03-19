@@ -148,7 +148,7 @@ test=# SELECT first_name,last_name,COALESCE(email,'-Email not provided-') AS ema
  Wyndham     | Bugge              | -Email not provided-
 ```
 
-## NULLIF
+## NULL-IF
 
 ```shell
 # returns the first argument, if not equal to the second argument
